@@ -1,8 +1,9 @@
-Problem: Smart City Transport Pass System
-📘 Context
+**Problem: Smart City Transport Pass System**
+
+**📘 Context**
 The city of "Codetropolis" has implemented a smart transport system where residents use rechargeable passes to access various modes of transport — Bus, Metro, and Bike Rental. Users have individual profiles and can interact with the system to load money, check their balance, use different transport options, and review travel history. The city wants the software to be modular, extensible, and robust.
 
-✅ Requirements & Rules
+**✅ Requirements & Rules**
 Transport Modes & Costing - Each transport mode (Bus, Metro, Bike Rental) has its own usage cost. Each mode defines its own rules.
 
 User Profile & Travel History - Each user has a name, balance, email and a log of their travel activity. User may or may not decide to use his/her email. The system must allow balance recharging, travel history viewing, and graceful handling when email is absent.
@@ -11,12 +12,15 @@ Discount Policy for Bike Rental - Bike Rental offers a 50% discount if a user ha
 
 Error Handling - System should be capable to highlight what went wrong and continue functioning without crashing.
 
-💡 Constraints
+**💡 Constraints**
 Bus cost: ₹20
 Metro cost: ₹30
 Bike Rental cost: ₹10
 Minimum 2 users should be defined at the start
-Sample Output
+
+
+**Sample Output**
+
 --- SMART CITY TRANSPORT PASS SYSTEM ---
 [INFO] Initializing Users...
 [User Created] Alice (Email: alice@example.com) - Balance: ₹100

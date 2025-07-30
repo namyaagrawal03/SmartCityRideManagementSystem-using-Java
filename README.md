@@ -1,73 +1,155 @@
-**Problem: Smart City Transport Pass System**
+# 🚗 Smart Ride-Sharing System
 
-**📘 Context**
-The city of "Codetropolis" has implemented a smart transport system where residents use rechargeable passes to access various modes of transport — Bus, Metro, and Bike Rental. Users have individual profiles and can interact with the system to load money, check their balance, use different transport options, and review travel history. The city wants the software to be modular, extensible, and robust.
+## 📘 Overview
 
-**✅ Requirements & Rules**
-Transport Modes & Costing - Each transport mode (Bus, Metro, Bike Rental) has its own usage cost. Each mode defines its own rules.
+This project simulates a **digital ride-sharing platform** for the city of **Codetropolis**, focusing on modular design and real-world system behavior. It handles user registration, ride requests, matching, trip management, fare calculation, feedback, analytics, and error handling — all within a predefined simulation.
 
-User Profile & Travel History - Each user has a name, balance, email and a log of their travel activity. User may or may not decide to use his/her email. The system must allow balance recharging, travel history viewing, and graceful handling when email is absent.
+Designed using **object-oriented principles**, this system ensures scalability, separation of concerns, and robustness, making it an ideal blueprint for real-world ride-hailing platforms.
 
-Discount Policy for Bike Rental - Bike Rental offers a 50% discount if a user has used it 2 or more times. This rule should be part of a discount system that allows certain transport types to define their own pricing conditions.
+---
 
-Error Handling - System should be capable to highlight what went wrong and continue functioning without crashing.
+## ✅ Features
 
-**💡 Constraints**
-Bus cost: ₹20
-Metro cost: ₹30
-Bike Rental cost: ₹10
-Minimum 2 users should be defined at the start
+- 👥 **User Roles:** Riders and Drivers with relevant attributes and histories
+- 🚘 **Vehicle Types:** Each driver owns a unique vehicle of a specific type (e.g., SEDAN, SUV, BIKE)
+- 📍 **Ride Request & Matching:** Based on vehicle preference and availability
+- 🔄 **Ride Lifecycle:** From request to completion or cancellation, with status tracking
+- 💰 **Flexible Fare Calculation:** Based on vehicle type with future extensibility (peak pricing, loyalty, etc.)
+- 🌟 **Feedback & Ratings:** After each completed ride
+- 📊 **Analytics:** Ride counts, top-rated drivers, ride history, and data filtering
+- ⚠️ **Error Handling:** For invalid inputs, unavailable drivers, and missing data
+- 🧩 **Modular Design:** Separate services for matching, billing, reporting, etc.
+
+---
+
+## 🛠 Tech Stack
+
+- Language: Java (or specify your language)
+- Concepts Used: 
+  - Object-Oriented Programming
+  - Encapsulation, Inheritance, Polymorphism
+  - Streams/Filters (if using Java)
+  - Optional Data Handling
+  - Exception Management
+
+---
+
+## 💡 Simulation Highlights
+
+- Minimum 2 riders and 3 drivers initialized
+- 2 completed rides and 1 canceled ride
+- Includes:
+  - Optional field handling (missing email)
+  - Lookup failure error
+  - Sorting and filtering via custom queries
+
+---
+
+## 🧪 Sample Output
+
+--- Initializing System ---
+
+Driver Registered: Alice [Rating: 3.75 | Vehicle: SEDAN | Plate Number: AL1234
+Driver Registered: Charlie [Rating: 4.25 | Vehicle: XUV | Plate Number: BO9987
+Driver Registered: Darcy [Rating: 4.0 | Vehicle: BIKE | Plate Number: CL5678
+Rider Registered: Namya [Email: Optional[namya@123]]
+Rider Registered: Emma [Email: Optional[bob@123]]
+
+------------------------------------------------------
+The balance of rider Namya is recharged with Rs.100.0
+New balance is 100.0
+
+Invalid Input: Pickup and drop locations must be provided.
+
+------------------------------------------------------
+The balance of rider Namya is recharged with Rs.100.0
+New balance is 200.0
+
+Namya requested a SEDAN from 'Airport' to 'City Center'
+Searching for available drivers...
+Driver matched: Alice (SEDAN)
+Driver Alice accepted the ride
+Ride ID RIDE1 is now ONGOING
+Driver Alice completed the ride
+Ride completed successfully
+Fare: ₹20.0
+The fare amount is deducted from account of user
+New balance is 180.0
+The fare of Rs. 20.0is credited in account of  Alice
+New balance of driver is 20.0
+Transaction sucessfull!!
+
+Feedback recorded: 5.0 stars
+New average rating of driver Alice is : 4.166666666666667
+
+------------------------------------------------------
+--- Reporting & Analytics ---
+✅ Total Rides Completed: 2
+✅ Total Rides Cancelled: 0
+Top Driver is: Charlie (4.25)
+
+Namya's Ride History:
+- RIDE1 | Destination: City Center | Vehicle: SEDAN | Fare: ₹20.0
+
+Emma's Ride History:
+- RIDE2 | Destination: Hotel Grand | Vehicle: BIKE | Fare: ₹16.0
+
+Available Drivers:
+- Alice [SEDAN]
+- Charlie [XUV]
+- Darcy [BIKE]
+
+------------------------------------------------------
+--- Data Queries (Streams & Filters) ---
+
+Riders with names starting with 'E': 
+Emma
+
+Drivers sorted by rating: 
+Charlie - 4.25
+Alice - 4.166666666666667
+Darcy - 4.0
+
+Rides by Vehicle Type: 
+SEDAN : 1
+BIKE : 1
 
 
-**Sample Output**
+## 🚦 System Components
 
---- SMART CITY TRANSPORT PASS SYSTEM ---
-[INFO] Initializing Users...
-[User Created] Alice (Email: alice@example.com) - Balance: ₹100
-[User Created] Bob (Email: not provided) - Balance: ₹30
+| Component         | Responsibility                                     |
+|------------------|-----------------------------------------------------|
+| `User`            | Abstract base class for Rider and Driver           |
+| `Rider`           | Stores ride history, contact info, ride requests   |
+| `Driver`          | Stores rating, vehicle details, performance data   |
+| `Vehicle`         | Represents a driver’s vehicle (type, plate)        |
+| `Ride`            | Tracks status, fare, feedback, and transitions     |
+| `RideManager`     | Handles matching, lifecycle, and analytics         |
+| `FareCalculator`  | Calculates fare based on vehicle type              |
+| `DataQueryService`| Provides filtering and sorting functionalities     |
+| `ErrorHandler`    | Reports issues like invalid IDs or data gaps       |
 
---- Travel Simulation ---
-[Alice chooses METRO]
-[Alice] Successfully used Metro (₹30)
-[Alice] New Balance: ₹70
+**📈 Analytics Summary (Example)**
 
-[Alice chooses BIKE_RENTAL]
-[Alice] Successfully used Bike Rental (₹10)
-[Alice] New Balance: ₹60
+✅ Total Rides Completed: 2
 
-[Alice chooses BIKE_RENTAL]
-[Alice] Successfully used Bike Rental (₹10)
-[Alice] New Balance: ₹50
+❌ Rides Cancelled: 1
 
-[Alice chooses BIKE_RENTAL]
-[DISCOUNT] Bike Rental discounted to ₹5
-[Alice] Successfully used Bike Rental (₹5)
-[Alice] New Balance: ₹45
+🌟 Top Rated Driver: Clara (4.9)
 
-[Bob chooses BUS]
-[Bob] Successfully used Bus (₹20)
-[Bob] New Balance: ₹10
+📌 Most Active Rider: Emma
 
-[Bob chooses METRO]
-[ERROR] Insufficient balance for Metro (Required: ₹30, Available: ₹10)
+🚘 Rides by Vehicle:
+SEDAN: 1
+BIKE: 1
+SUV: 0
 
---- Recharge Simulation ---
-[Alice recharges ₹50]
-[Alice] New Balance: ₹95
+**🔍 Data Query Examples**
 
-[Bob recharges ₹100]
-[Bob] New Balance: ₹110
+Riders with names starting with E
 
---- Travel History ---
-[Alice's Travel History]
-1. METRO - ₹30
-2. BIKE_RENTAL - ₹10
-3. BIKE_RENTAL - ₹10
-4. BIKE_RENTAL - ₹5
+Drivers sorted by rating
 
-[Bob's Travel History]
-1. BUS - ₹20
+Rides filtered by status or vehicle type
 
---- Department Summary (Final Balances) ---
-Alice (Email: alice@example.com) - Balance: ₹95
-Bob (Email: not provided) - Balance: ₹110
+Optional handling for users without emails
